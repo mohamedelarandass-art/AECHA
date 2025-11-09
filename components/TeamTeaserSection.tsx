@@ -26,11 +26,11 @@ const TeamMemberAvatar: React.FC<TeamMemberAvatarProps> = ({ imgSrc, name, role,
         <img
           src={imgSrc}
           alt={`Portrait of ${name}`}
-          className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-white bg-white shadow-md group-hover:shadow-lg group-hover:scale-110 transition-transform duration-300"
+          className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-card bg-card shadow-md group-hover:shadow-lg group-hover:scale-110 transition-transform duration-300"
         />
         <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <p className="text-sm font-semibold text-[#3A4A3E] whitespace-nowrap">{name}</p>
-          <p className="text-xs text-[#6B7B71] whitespace-nowrap">{role}</p>
+          <p className="text-sm font-semibold text-text-dark whitespace-nowrap">{name}</p>
+          <p className="text-xs text-text-light whitespace-nowrap">{role}</p>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@ const TeamTeaserSection: React.FC<TeamTeaserProps> = ({ navigate }) => {
 
   return (
     <section className="py-8 fade-in-up-section">
-      <h2 className="text-2xl font-bold text-center mb-8 text-[#3A4A3E]">
+      <h2 className="text-2xl font-bold text-center mb-8 text-text-dark">
         Rencontrez ceux qui s'engagent
       </h2>
       <div className="flex justify-center items-center gap-8 md:gap-12 h-48">
@@ -84,7 +84,7 @@ const TeamTeaserSection: React.FC<TeamTeaserProps> = ({ navigate }) => {
         <a 
           href="/equipe"
           onClick={handleNavigate}
-          className="inline-block px-8 py-3 bg-[#3A4A3E] text-white rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-md cursor-pointer"
+          className="inline-block px-8 py-3 bg-primary text-white rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-md cursor-pointer"
         >
           Voir l'équipe
         </a>

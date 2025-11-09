@@ -50,19 +50,19 @@ const ProjectCard: React.FC<{ project: Project; language: Language; navigate: Na
     };
 
     return (
-        <div className="bg-white p-6 rounded-[20px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] flex flex-col justify-between transition-transform duration-300 hover:scale-[1.03]">
+        <div className="bg-card p-6 rounded-[20px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] flex flex-col justify-between transition-transform duration-300 hover:scale-[1.03]">
             <div>
                 <div className="flex justify-between items-start mb-3 text-xs">
-                    <span className="bg-green-100 text-green-800 font-semibold px-2 py-1 rounded-full">{project.committee[language]}</span>
+                    <span className="bg-primary/10 text-primary font-semibold px-2 py-1 rounded-full">{project.committee[language]}</span>
                     <span className="bg-yellow-100 text-yellow-800 font-semibold px-2 py-1 rounded-full flex items-center">
                         <span className="w-2 h-2 bg-yellow-400 rounded-full ltr:mr-2 rtl:ml-2"></span>
                         {language === 'ar' ? project.status_ar[language] : project.status[language]}
                     </span>
                 </div>
-                <h3 className="text-xl font-bold text-[#3A4A3E] mb-2">{project.title[language]}</h3>
-                <p className="text-sm text-[#6B7B71]">{project.description[language]}</p>
+                <h3 className="text-xl font-bold text-text-dark mb-2">{project.title[language]}</h3>
+                <p className="text-sm text-text-light">{project.description[language]}</p>
             </div>
-            <button onClick={handleCtaClick} className="mt-4 text-sm font-semibold text-[#3A4A3E] hover:text-[#F4A261] transition-colors w-full text-left rtl:text-right">
+            <button onClick={handleCtaClick} className="mt-4 text-sm font-semibold text-text-dark hover:text-accent transition-colors w-full text-left rtl:text-right">
                 {project.cta[language]} 💬
             </button>
         </div>
@@ -83,19 +83,19 @@ const ProgramPage: React.FC<ProgramPageProps> = ({ navigate, language }) => {
     }, [activeFilter]);
 
     return (
-        <div className="pt-24 bg-[#F3F4F0]">
+        <div className="pt-24 bg-bg-primary">
             <div className="container mx-auto px-4 sm:px-6 space-y-12 pb-16">
 
                 {/* Section 1: Introduction & Filters */}
                 <section className="text-center max-w-3xl mx-auto fade-in-up-section">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-[#3A4A3E]">{t.title}</h1>
-                    <p className="mt-4 text-md md:text-lg text-[#6B7B71]">{t.subtitle}</p>
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-text-dark">{t.title}</h1>
+                    <p className="mt-4 text-md md:text-lg text-text-light">{t.subtitle}</p>
                     <div className="mt-8 flex flex-wrap justify-center gap-2">
                         {filters.map(filter => (
                             <button
                                 key={filter}
                                 onClick={() => setActiveFilter(filter)}
-                                className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${activeFilter === filter ? 'bg-white text-[#3A4A3E] shadow-sm' : 'bg-transparent text-[#6B7B71] hover:bg-white/50'}`}
+                                className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${activeFilter === filter ? 'bg-card text-text-dark shadow-sm' : 'bg-transparent text-text-light hover:bg-card/50'}`}
                             >
                                 {t.filters[filter]}
                             </button>
@@ -113,12 +113,12 @@ const ProgramPage: React.FC<ProgramPageProps> = ({ navigate, language }) => {
                 </section>
 
                 {/* Section 3: Final CTA */}
-                <section className="text-center bg-white p-8 rounded-[20px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] max-w-2xl mx-auto fade-in-up-section">
-                    <h2 className="text-3xl font-bold text-[#3A4A3E] mb-4">{t.finalCtaTitle}</h2>
-                    <p className="text-[#6B7B71] mb-6">{t.finalCtaText}</p>
+                <section className="text-center bg-card p-8 rounded-[20px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] max-w-2xl mx-auto fade-in-up-section">
+                    <h2 className="text-3xl font-bold text-text-dark mb-4">{t.finalCtaTitle}</h2>
+                    <p className="text-text-light mb-6">{t.finalCtaText}</p>
                     <button
                         onClick={() => navigate('/ta-voix')}
-                        className="inline-block px-10 py-4 bg-[#F4A261] text-white rounded-full font-bold text-lg hover:bg-opacity-90 transition-all duration-300 shadow-lg"
+                        className="inline-block px-10 py-4 bg-accent text-white rounded-full font-bold text-lg hover:bg-opacity-90 transition-all duration-300 shadow-lg"
                     >
                         {t.finalCtaButton}
                     </button>

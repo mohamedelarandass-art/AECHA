@@ -143,7 +143,7 @@ type Cycle = keyof typeof translations.fr.cycles;
 
 
 const CategoryButton = ({ Icon, label, onClick, selected }: { Icon: React.FC<{className?: string}>, label: string, onClick: () => void, selected: boolean }) => (
-    <button onClick={onClick} className={`flex flex-col items-center justify-center text-center p-3 rounded-xl transition-all duration-300 w-full aspect-square ${selected ? 'bg-[#3A4A3E] text-white shadow-lg scale-105' : 'bg-gray-100 hover:bg-gray-200'}`}>
+    <button onClick={onClick} className={`flex flex-col items-center justify-center text-center p-3 rounded-xl transition-all duration-300 w-full aspect-square ${selected ? 'bg-primary text-white shadow-lg scale-105' : 'bg-bg-primary hover:bg-bg-primary/60'}`}>
         <Icon className="w-8 h-8 mb-2"/>
         <span className="text-xs font-semibold">{label}</span>
     </button>
@@ -227,23 +227,23 @@ const TaVoixPage: React.FC<{ language: Language }> = ({ language }) => {
 
 
     return (
-        <div className="pt-24 bg-[#F3F4F0]">
+        <div className="pt-24 bg-bg-primary">
             <div className="container mx-auto px-4 sm:px-6 space-y-12 pb-16">
                 <section className="text-center max-w-3xl mx-auto fade-in-up-section">
-                    <YourVoiceIcon className="w-20 h-20 mx-auto text-[#3A4A3E] mb-4"/>
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-[#3A4A3E]">{t.title}</h1>
-                    <p className="mt-4 text-md md:text-lg text-[#6B7B71]">{t.subtitle}</p>
+                    <YourVoiceIcon className="w-20 h-20 mx-auto text-text-dark mb-4"/>
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-text-dark">{t.title}</h1>
+                    <p className="mt-4 text-md md:text-lg text-text-light">{t.subtitle}</p>
                 </section>
 
                 <section className="max-w-2xl mx-auto fade-in-up-section">
-                    <div className="bg-white p-6 sm:p-8 rounded-[20px] shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+                    <div className="bg-card p-6 sm:p-8 rounded-[20px] shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
                         {!submitted ? (
                             <form onSubmit={handleSubmit}>
                                 {/* Step 1 */}
                                 {step === 1 && (
                                     <div>
                                         <h3 className="text-xl font-bold text-center mb-6">{t.step1Title}</h3>
-                                        <div className="grid grid-cols-4 gap-2 sm:gap-4">
+                                        <div className="grid grid-cols-4 gap-2 sm:gap-4 text-text-dark">
                                             {categories.map(({key, Icon}) => (
                                                 <CategoryButton key={key} Icon={Icon} label={t.categories[key]} onClick={() => handleCategorySelect(key)} selected={formData.category === key} />
                                             ))}
@@ -256,28 +256,28 @@ const TaVoixPage: React.FC<{ language: Language }> = ({ language }) => {
                                         <h3 className="text-xl font-bold text-center mb-6">{t.step2Title}</h3>
                                         <div className="flex justify-center flex-wrap gap-2 mb-4">
                                             {(Object.keys(t.cycles) as Cycle[]).map(cycle => (
-                                                <button type="button" key={cycle} onClick={() => handleCycleSelect(cycle)} className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${formData.cycle === cycle ? 'bg-[#3A4A3E] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}>{t.cycles[cycle]}</button>
+                                                <button type="button" key={cycle} onClick={() => handleCycleSelect(cycle)} className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${formData.cycle === cycle ? 'bg-primary text-white' : 'bg-bg-primary hover:bg-bg-primary/60'}`}>{t.cycles[cycle]}</button>
                                             ))}
                                         </div>
 
                                         {formData.cycle === 'Ingenieur' && (
                                             <div className="flex justify-center gap-2 my-4">
                                                 {t.years.map(year => (
-                                                    <button type="button" key={year} onClick={() => handleYearSelect(year)} className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${formData.year === year ? 'bg-[#3A4A3E] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}>{year}</button>
+                                                    <button type="button" key={year} onClick={() => handleYearSelect(year)} className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${formData.year === year ? 'bg-primary text-white' : 'bg-bg-primary hover:bg-bg-primary/60'}`}>{year}</button>
                                                 ))}
                                             </div>
                                         )}
                                         
                                         {currentFilieres.length > 0 && (
-                                            <select value={formData.filiere} onChange={e => setFormData(prev => ({...prev, filiere: e.target.value}))} required className="w-full p-3 bg-gray-100 rounded-lg mt-4">
+                                            <select value={formData.filiere} onChange={e => setFormData(prev => ({...prev, filiere: e.target.value}))} required className="w-full p-3 bg-bg-primary rounded-lg mt-4">
                                                 <option value="">{t.filierePlaceholder}</option>
                                                 {currentFilieres.map(f => <option key={f} value={f}>{f}</option>)}
                                             </select>
                                         )}
 
                                         <div className="flex justify-between mt-6">
-                                            <button type="button" onClick={() => setStep(1)} className="text-sm font-semibold text-[#6B7B71]">Précédent</button>
-                                            <button type="button" onClick={() => setStep(3)} disabled={!isStep2Complete} className="text-sm font-semibold text-[#3A4A3E] disabled:opacity-50">Suivant</button>
+                                            <button type="button" onClick={() => setStep(1)} className="text-sm font-semibold text-text-light">Précédent</button>
+                                            <button type="button" onClick={() => setStep(3)} disabled={!isStep2Complete} className="text-sm font-semibold text-text-dark disabled:opacity-50">Suivant</button>
                                         </div>
                                     </div>
                                 )}
@@ -286,13 +286,13 @@ const TaVoixPage: React.FC<{ language: Language }> = ({ language }) => {
                                      <div>
                                         <h3 className="text-xl font-bold text-center mb-6">{t.step3Title}</h3>
                                         <div className="space-y-4">
-                                            <input type="text" placeholder={t.subjectPlaceholder} value={formData.subject} onChange={e => setFormData(prev => ({...prev, subject: e.target.value}))} required className="w-full p-3 bg-gray-100 rounded-lg"/>
-                                            <textarea placeholder={t.messagePlaceholder} value={formData.message} onChange={e => setFormData(prev => ({...prev, message: e.target.value}))} required rows={4} className="w-full p-3 bg-gray-100 rounded-lg"></textarea>
-                                            <button type="button" className="text-sm font-semibold text-[#3A4A3E]">{t.attachPhoto}</button>
+                                            <input type="text" placeholder={t.subjectPlaceholder} value={formData.subject} onChange={e => setFormData(prev => ({...prev, subject: e.target.value}))} required className="w-full p-3 bg-bg-primary rounded-lg"/>
+                                            <textarea placeholder={t.messagePlaceholder} value={formData.message} onChange={e => setFormData(prev => ({...prev, message: e.target.value}))} required rows={4} className="w-full p-3 bg-bg-primary rounded-lg"></textarea>
+                                            <button type="button" className="text-sm font-semibold text-primary">{t.attachPhoto}</button>
                                         </div>
                                         <div className="flex justify-between mt-6">
-                                            <button type="button" onClick={() => setStep(formData.category === 'Formation' ? 2 : 1)} className="text-sm font-semibold text-[#6B7B71]">Précédent</button>
-                                            <button type="button" onClick={() => setStep(4)} disabled={!formData.subject || !formData.message} className="text-sm font-semibold text-[#3A4A3E] disabled:opacity-50">Suivant</button>
+                                            <button type="button" onClick={() => setStep(formData.category === 'Formation' ? 2 : 1)} className="text-sm font-semibold text-text-light">Précédent</button>
+                                            <button type="button" onClick={() => setStep(4)} disabled={!formData.subject || !formData.message} className="text-sm font-semibold text-text-dark disabled:opacity-50">Suivant</button>
                                         </div>
                                     </div>
                                 )}
@@ -301,24 +301,24 @@ const TaVoixPage: React.FC<{ language: Language }> = ({ language }) => {
                                      <div>
                                         <h3 className="text-xl font-bold text-center mb-6">{t.step4Title}</h3>
                                         <div className="space-y-4">
-                                            <label className="flex items-start p-4 bg-gray-100 rounded-lg cursor-pointer">
+                                            <label className="flex items-start p-4 bg-bg-primary rounded-lg cursor-pointer">
                                                 <input type="radio" name="notification" value="anonymous" checked={formData.notification === 'anonymous'} onChange={e => setFormData(prev => ({...prev, notification: e.target.value}))} className="mt-1"/>
                                                 <div className="ltr:ml-3 rtl:mr-3">
                                                     <p className="font-semibold">{t.anonymousOption}</p>
-                                                    <p className="text-xs text-[#6B7B71]">{t.anonymousHelp}</p>
+                                                    <p className="text-xs text-text-light">{t.anonymousHelp}</p>
                                                 </div>
                                             </label>
-                                            <label className="flex items-start p-4 bg-gray-100 rounded-lg cursor-pointer">
+                                            <label className="flex items-start p-4 bg-bg-primary rounded-lg cursor-pointer">
                                                 <input type="radio" name="notification" value="email" checked={formData.notification === 'email'} onChange={e => setFormData(prev => ({...prev, notification: e.target.value}))} className="mt-1"/>
                                                 <div className="ltr:ml-3 rtl:mr-3">
                                                     <p className="font-semibold">{t.emailOption}</p>
-                                                    {formData.notification === 'email' && <input type="email" placeholder={t.emailPlaceholder} required className="w-full p-2 mt-2 bg-white rounded-md" value={formData.email} onChange={e => setFormData(prev => ({...prev, email: e.target.value}))}/>}
+                                                    {formData.notification === 'email' && <input type="email" placeholder={t.emailPlaceholder} required className="w-full p-2 mt-2 bg-card rounded-md" value={formData.email} onChange={e => setFormData(prev => ({...prev, email: e.target.value}))}/>}
                                                 </div>
                                             </label>
                                         </div>
                                         <div className="flex justify-between mt-6 items-center">
-                                            <button type="button" onClick={() => setStep(3)} className="text-sm font-semibold text-[#6B7B71]">Précédent</button>
-                                            <button type="submit" className="px-6 py-3 bg-[#F4A261] text-white rounded-full font-bold hover:bg-opacity-90 transition-all duration-300">{t.submitButton}</button>
+                                            <button type="button" onClick={() => setStep(3)} className="text-sm font-semibold text-text-light">Précédent</button>
+                                            <button type="submit" className="px-6 py-3 bg-accent text-white rounded-full font-bold hover:bg-opacity-90 transition-all duration-300">{t.submitButton}</button>
                                         </div>
                                     </div>
                                 )}
@@ -326,26 +326,26 @@ const TaVoixPage: React.FC<{ language: Language }> = ({ language }) => {
                         ) : (
                             <div className="text-center">
                                 <span className="text-6xl">✅</span>
-                                <h2 className="text-2xl font-bold text-[#3A4A3E] mt-4 mb-2">{t.successTitle}</h2>
-                                <p className="text-[#6B7B71]">{t.successText}</p>
-                                <p className="my-3 text-xl font-mono font-bold bg-gray-100 p-3 rounded-lg inline-block">{trackingCode}</p>
-                                <p className="text-sm text-[#6B7B71]">{t.successInfo}</p>
+                                <h2 className="text-2xl font-bold text-text-dark mt-4 mb-2">{t.successTitle}</h2>
+                                <p className="text-text-light">{t.successText}</p>
+                                <p className="my-3 text-xl font-mono font-bold bg-bg-primary p-3 rounded-lg inline-block">{trackingCode}</p>
+                                <p className="text-sm text-text-light">{t.successInfo}</p>
                             </div>
                         )}
                     </div>
                 </section>
                 
                 <section className="max-w-2xl mx-auto fade-in-up-section">
-                     <div className="bg-white p-6 sm:p-8 rounded-[20px] shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+                     <div className="bg-card p-6 sm:p-8 rounded-[20px] shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
                         <h3 className="text-xl font-bold text-center mb-4">{t.trackerTitle}</h3>
                         <div className="flex gap-2">
-                            <input type="text" placeholder={t.trackerPlaceholder} value={trackInput} onChange={e => setTrackInput(e.target.value)} className="flex-grow p-3 bg-gray-100 rounded-lg"/>
-                            <button onClick={handleTrack} className="px-6 bg-[#3A4A3E] text-white rounded-lg font-semibold">{t.trackerButton}</button>
+                            <input type="text" placeholder={t.trackerPlaceholder} value={trackInput} onChange={e => setTrackInput(e.target.value)} className="flex-grow p-3 bg-bg-primary rounded-lg"/>
+                            <button onClick={handleTrack} className="px-6 bg-primary text-white rounded-lg font-semibold">{t.trackerButton}</button>
                         </div>
                         {trackedStatus && (
-                            <div className="mt-4 bg-gray-50 p-4 rounded-lg">
+                            <div className="mt-4 bg-bg-primary/50 p-4 rounded-lg">
                                 <p className="font-bold text-lg">{trackedStatus.status}</p>
-                                <p className="text-sm text-[#6B7B71]">{trackedStatus.message}</p>
+                                <p className="text-sm text-text-light">{trackedStatus.message}</p>
                             </div>
                         )}
                      </div>

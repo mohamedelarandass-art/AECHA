@@ -8,9 +8,51 @@ import TeamPage from './pages/TeamPage';
 import VisionPage from './pages/VisionPage';
 import ProgramPage from './pages/ProgramPage';
 import TaVoixPage from './pages/TaVoixPage';
+import ThemeSwitcher from './components/ThemeSwitcher';
 
 export type Language = 'fr' | 'ar';
 export type NavigateFunction = (path: string) => void;
+export type Theme = 'original' | 'forest' | 'tech' | 'earthy';
+
+const themes = {
+  original: {
+    '--bg-color': '#F3F4F0',
+    '--card-color': '#FFFFFF',
+    '--text-dark': '#3A4A3E',
+    '--text-light': '#6B7B71',
+    '--accent-color': '#F4A261',
+    '--primary-color': '#3A4A3E',
+    '--secondary-color': '#6B7B71',
+  },
+  forest: {
+    '--bg-color': '#F7F7F7',
+    '--card-color': '#FFFFFF',
+    '--text-dark': '#1E1E1E',
+    '--text-light': '#3A5A70',
+    '--accent-color': '#D95F43',
+    '--primary-color': '#2E5740',
+    '--secondary-color': '#3A5A70',
+  },
+  tech: {
+    '--bg-color': '#FFFFFF',
+    '--card-color': '#FFFFFF',
+    '--text-dark': '#333333',
+    '--text-light': '#1A2B44',
+    '--accent-color': '#F2C94C',
+    '--primary-color': '#1A2B44',
+    '--secondary-color': '#4CAF50',
+  },
+  earthy: {
+    '--bg-color': '#FBF9F6',
+    '--card-color': '#FFFFFF',
+    '--text-dark': '#2A2A2A',
+    '--text-light': '#5D4037',
+    '--accent-color': '#FF6B00',
+    '--primary-color': '#3D4A3A',
+    '--secondary-color': '#5D4037',
+  }
+};
+
 
 const HomePage = ({ navigate, language }: { navigate: NavigateFunction, language: Language }) => (
   <>
@@ -26,6 +68,7 @@ const HomePage = ({ navigate, language }: { navigate: NavigateFunction, language
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('/');
   const [language, setLanguage] = useState<Language>('fr');
+  const [theme, setTheme] = useState<Theme>('original');
 
   const navigate: NavigateFunction = (path: string) => {
     const [basePath] = path.split('?');
@@ -34,6 +77,13 @@ const App: React.FC = () => {
       window.scrollTo(0, 0);
     }
   };
+  
+  useEffect(() => {
+    const currentTheme = themes[theme];
+    for (const key in currentTheme) {
+      document.documentElement.style.setProperty(key, currentTheme[key as keyof typeof currentTheme]);
+    }
+  }, [theme]);
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -82,7 +132,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="bg-[#F3F4F0] min-h-screen text-[#3A4A3E]">
+    <div className="bg-bg-primary min-h-screen text-text-dark">
       <Header 
         navigate={navigate} 
         currentPage={currentPage}
@@ -92,9 +142,10 @@ const App: React.FC = () => {
       <main>
         {ComponentToRender}
       </main>
-      <footer className="text-center p-4 text-[#6B7B71] text-sm">
+      <footer className="text-center p-4 text-text-light text-sm">
         <p>&copy; 2024 AECHA. Tous droits réservés.</p>
       </footer>
+      <ThemeSwitcher theme={theme} setTheme={setTheme} />
     </div>
   );
 };

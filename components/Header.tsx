@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ navigate, currentPage, language, setLan
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#F3F4F0]/80 backdrop-blur-sm fade-in-up-section">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-bg-primary/80 backdrop-blur-sm fade-in-up-section">
         <div className="container mx-auto px-4 sm:px-6 h-20 flex justify-between items-center">
           <a 
             href="/" 
@@ -58,29 +58,29 @@ const Header: React.FC<HeaderProps> = ({ navigate, currentPage, language, setLan
             className="flex items-center space-x-2" 
             aria-label="Retour à la page d'accueil"
           >
-            <LogoIcon className="h-8 w-8 text-[#3A4A3E]" />
-            <span className="text-2xl font-bold text-[#3A4A3E]">AECHA</span>
+            <LogoIcon className="h-8 w-8 text-text-dark" />
+            <span className="text-2xl font-bold text-text-dark">AECHA</span>
           </a>
           
           <div className="flex items-center">
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center space-x-8 text-lg font-semibold text-[#3A4A3E]">
-                <a href="/vision" onClick={(e) => handleNavClick(e, '/vision')} className="hover:text-[#6B7B71] transition-colors">{t.vision}</a>
-                <a href="/programme" onClick={(e) => handleNavClick(e, '/programme')} className="hover:text-[#6B7B71] transition-colors">{t.programme}</a>
-                <a href="/ta-voix" onClick={(e) => handleNavClick(e, '/ta-voix')} className="hover:text-[#6B7B71] transition-colors">{t.taVoix}</a>
+            <nav className="hidden md:flex items-center space-x-8 text-lg font-semibold text-text-dark">
+                <a href="/vision" onClick={(e) => handleNavClick(e, '/vision')} className="hover:text-text-light transition-colors">{t.vision}</a>
+                <a href="/programme" onClick={(e) => handleNavClick(e, '/programme')} className="hover:text-text-light transition-colors">{t.programme}</a>
+                <a href="/ta-voix" onClick={(e) => handleNavClick(e, '/ta-voix')} className="hover:text-text-light transition-colors">{t.taVoix}</a>
             </nav>
             <div className="hidden md:block w-px h-6 bg-gray-300 mx-6"></div>
             <div className="hidden md:flex items-center space-x-2 text-sm font-bold">
               <button 
                 onClick={() => setLanguage('fr')} 
-                className={`${language === 'fr' ? 'text-[#3A4A3E]' : 'text-[#6B7B71]'} hover:text-[#3A4A3E] transition-colors`}
+                className={`${language === 'fr' ? 'text-text-dark' : 'text-text-light'} hover:text-text-dark transition-colors`}
               >
                 FR
               </button>
-              <span className="text-[#6B7B71]">|</span>
+              <span className="text-text-light">|</span>
               <button 
                 onClick={() => setLanguage('ar')}
-                className={`${language === 'ar' ? 'text-[#3A4A3E]' : 'text-[#6B7B71]'} hover:text-[#3A4A3E] transition-colors`}
+                className={`${language === 'ar' ? 'text-text-dark' : 'text-text-light'} hover:text-text-dark transition-colors`}
               >
                 AR
               </button>
@@ -89,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({ navigate, currentPage, language, setLan
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 md:hidden"
+              className="p-2 md:hidden text-text-dark"
               aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
               aria-expanded={isMenuOpen}
             >
@@ -101,26 +101,26 @@ const Header: React.FC<HeaderProps> = ({ navigate, currentPage, language, setLan
 
       {/* Mobile Menu Panel */}
       <div className={`
-        md:hidden fixed inset-0 z-40 bg-[#F3F4F0] pt-20
+        md:hidden fixed inset-0 z-40 bg-bg-primary pt-20
         transition-transform duration-300 ease-in-out
         ${isMenuOpen ? 'transform translate-x-0' : (language === 'ar' ? 'transform -translate-x-full' : 'transform translate-x-full')}
       `}>
         <div className="container mx-auto px-4 sm:px-6 h-full">
-          <nav className="flex flex-col items-center justify-center h-full space-y-8 text-2xl font-semibold text-[#3A4A3E]">
-            <a href="/vision" onClick={(e) => handleNavClick(e, '/vision')} className="hover:text-[#6B7B71] transition-colors">{t.vision}</a>
-            <a href="/programme" onClick={(e) => handleNavClick(e, '/programme')} className="hover:text-[#6B7B71] transition-colors">{t.programme}</a>
-            <a href="/ta-voix" onClick={(e) => handleNavClick(e, '/ta-voix')} className="hover:text-[#6B7B71] transition-colors">{t.taVoix}</a>
+          <nav className="flex flex-col items-center justify-center h-full space-y-8 text-2xl font-semibold text-text-dark">
+            <a href="/vision" onClick={(e) => handleNavClick(e, '/vision')} className="hover:text-text-light transition-colors">{t.vision}</a>
+            <a href="/programme" onClick={(e) => handleNavClick(e, '/programme')} className="hover:text-text-light transition-colors">{t.programme}</a>
+            <a href="/ta-voix" onClick={(e) => handleNavClick(e, '/ta-voix')} className="hover:text-text-light transition-colors">{t.taVoix}</a>
             <div className="pt-8 flex items-center space-x-4 text-lg font-bold">
               <button 
                 onClick={() => handleLangClick('fr')} 
-                className={`${language === 'fr' ? 'text-[#3A4A3E]' : 'text-[#6B7B71]'} hover:text-[#3A4A3E] transition-colors`}
+                className={`${language === 'fr' ? 'text-text-dark' : 'text-text-light'} hover:text-text-dark transition-colors`}
               >
                 FR
               </button>
-              <span className="text-[#6B7B71]">|</span>
+              <span className="text-text-light">|</span>
               <button 
                 onClick={() => handleLangClick('ar')}
-                className={`${language === 'ar' ? 'text-[#3A4A3E]' : 'text-[#6B7B71]'} hover:text-[#3A4A3E] transition-colors`}
+                className={`${language === 'ar' ? 'text-text-dark' : 'text-text-light'} hover:text-text-dark transition-colors`}
               >
                 AR
               </button>
